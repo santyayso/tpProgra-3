@@ -1,0 +1,35 @@
+<%- include("partials/head.ejs")%>
+    <%- include("partials/nav.ejs")%>
+
+        <main>
+
+            <section class="secccion-productos">
+                 <div id="contenedor-productos">
+                <!-- Inicio del forEach -->
+                <% arrayProductos.forEach(producto=> { %>
+
+                    <div class="card-producto">
+                        <img src="<%= producto.imagen %>" alt="<%= producto.nombre %>">
+
+                        <h4>
+                            <%= producto.nombre %>
+                        </h4>
+
+                        <p> <strong> ID: <%= producto.id %></strong>
+                        </p>
+
+                        <p> <strong>$<%= producto.precio %></strong> 
+                        </p>
+
+                        <p>Categoria: <%= producto.categoria %>
+                        </p>
+
+                    </div>
+
+                    <% }) %>
+
+                </div>
+            </section>
+        </main>
+
+        <%- include("partials/footer.ejs")%>

@@ -1,0 +1,180 @@
+:root {
+    --msg-error-bg: #f8d7da;
+    --msg-error-color: #58151c;
+    --msg-error-border: #f1aeb5;
+    --celeste: rgb(46, 161, 214);
+}
+
+/* GENERALES */
+ul {
+    list-style-type: none;
+}
+
+body {
+    background-color: rgb(255, 255, 255);
+    font-family: Arial;
+    margin: 0;
+}
+
+
+ a {
+    text-decoration: none;
+    color: rgba(253, 253, 253);
+}
+
+
+header {
+    height: 30%;
+    background-color:var(--celeste);
+    border-radius: 15px;
+    width: 70%;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+
+header, .enlaces {
+    display: flex;
+    justify-content: space-around;
+}
+
+
+
+.logo {
+    width: 175px;
+  
+}
+
+.logo img {
+    width: 100%;
+;
+}
+
+
+.enlaces {
+    width: 80%;
+    align-items: center;
+    margin: 0;
+}
+
+a:hover{
+    color: rgba(235, 228, 228, 0.697);
+}
+
+
+
+/* CONTENEDOR DE PRODUCTOS */
+#contenedor-productos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 70%;
+    margin: 0 auto;
+    margin-top: 3%;
+    gap: 100px;
+  
+
+}
+
+
+
+
+
+/* Card producto */
+.card-producto {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    width: 10%;
+    background-color: rgba(255, 255, 255, 0.996);
+    color: black;
+    border-radius: 15px;
+    border: 3px solid var(--celeste);
+    gap: 10px;
+    padding: 15px;
+}
+
+.card-producto img {
+    width: 95px;
+}
+
+.card-producto h4, .card-producto p {
+    margin: 0;
+}
+
+.card-producto h4 {
+    font-size: 0.8rem;
+}
+
+.card-producto:hover{
+    background-color: var(--celeste);
+    color: white;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.lista-producto {
+    display: flex;
+    align-items: center;
+    /* border: 1px solid; */
+    width: 100%;
+    justify-content: space-around;
+}
+
+.lista-producto img {
+    width: 70px;
+    border-radius: 5px;
+}
+
+.lista-producto p {
+    font-size: 14px;
+}
+
+.lista-producto img, .lista-producto p {
+    margin-bottom: 0;
+}
+
+
+
+
+.form-alta {
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+}
+
+#deleteProduct-button {
+    margin-bottom: 0;
+}
+
+.mensaje-error {
+    color: var(--msg-error-color);
+    background-color: var(--msg-error-bg);
+    border: 1px solid var(--msg-error-border);
+    border-radius: 6px;
+    margin-top: 20px;
+    padding: 15px;
+    width: 100%;
+    text-align: center;
+}
+
+
+
+
+#contenedor-productos ul {
+    margin-top: 20px;
+    width: 100%;
+    /* border: 1px solid; */
+    padding-left: 0;
+}
+
