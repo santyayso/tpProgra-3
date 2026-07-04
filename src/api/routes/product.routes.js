@@ -1,11 +1,13 @@
 import { Router } from "express";
-import { ControladorObtenerProductos, ControladorObtenerProductoID, ControladorCrearProducto} from "../controllers/product.controllers.js";
+import { controladorObtenerProductos, controladorObtenerProductoID, controladorCrearProducto, controladorBorrarProducto, controladorModificarProducto} from "../controllers/product.controllers.js";
 import { validarId, validarProducto} from "../middlewares/middlewares.js";
 const router = Router();
 
-router.get("/", ControladorObtenerProductos);
-router.get("/:id",validarId, ControladorObtenerProductoID )
-router.post("/", validarProducto, ControladorCrearProducto);
+router.get("/", controladorObtenerProductos);
+router.get("/:id",validarId, controladorObtenerProductoID )
+router.post("/", validarProducto, controladorCrearProducto);
+router.delete("/:id", validarId, controladorBorrarProducto)
+router.put("/", validarProducto, controladorModificarProducto);
 
 export default router;
 

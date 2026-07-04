@@ -28,3 +28,18 @@ export const vistaPost = async (request, response) => {
         title: "Crear"
     })
 }
+
+export const vistaBorrar = async (request, response) => {
+        response.render("delete", {
+        title: "Eliminar",
+    })
+
+}
+
+
+export const vistaModificar = async (request, response) => {
+    response.render("put", {
+        title: "Modificar",
+    
+    })
+}

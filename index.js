@@ -26,7 +26,6 @@ app.set("view engine", "ejs"); // configuramos ejs como motor de vistas
 app.set("views", join(__dirname, "src/views"));
 
 app.use("/dashboard", viewRoutes);
-
 app.use("/api/productos", productRoutes);
 
 // Escuchador de puerto

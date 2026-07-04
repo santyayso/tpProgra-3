@@ -12,14 +12,29 @@ const selecProductById = (id) => {
 }
 
 const insertProductos = (cleanNombre, imagen, categoria, precio) => {
-        const sql = "INSERT INTO productos (nombre, imagen, categoria, precio) VALUES (?, ?, ?, ?)";
+        const consultaSQL = "INSERT INTO productos (nombre, imagen, categoria, precio) VALUES (?, ?, ?, ?)";
 
-        return connection.query(sql, [cleanNombre, imagen, categoria, precio]);
+        return connection.query(consultaSQL, [cleanNombre, imagen, categoria, precio]);
+}
+
+
+const deleteProducto = (id) => {
+      const consultaSQL = "DELETE FROM productos WHERE id = ?";
+
+       return connection.query(consultaSQL, [id]);
+}
+
+const updateProducto = (nombre, imagen, categoria, precio, id) => {
+        const consultaSQL = `UPDATE productos SET nombre = ?, imagen = ?, categoria = ?, precio = ? WHERE id = ?`;
+        return connection.query(consultaSQL, [nombre, imagen, categoria, precio, id]);
+
 }
 
 export default {
     selectProductos,
     selecProductById,
-    insertProductos
+    insertProductos,
+    deleteProducto,
+    updateProducto
 }
 

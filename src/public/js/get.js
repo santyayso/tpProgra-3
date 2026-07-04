@@ -32,7 +32,7 @@
                     return;
                 }
 
-                const producto = data.payload[0];
+                const producto = data.producto[0];
 
                 mostrarProducto(producto);
             }
