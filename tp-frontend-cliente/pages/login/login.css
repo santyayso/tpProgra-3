@@ -1,0 +1,65 @@
+:root {
+    --fondo: #161616;
+    --card: #0d0d0d;
+    --gris: #333;
+}
+
+body {
+    font-family: Arial;
+}
+
+.pantalla-bienvenida {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: var(--fondo);
+}
+
+.contenedor-bienvenida {
+    background-color: var(--card);
+    padding: 50px;
+    border-radius: 20px;
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    border: 2px solid var(--gris);
+}
+
+#logo-bienvenida {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+}
+
+#input-nombre {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 2px solid var(--gris);
+    background-color: #2a2a2a;
+    color: #fff;
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+/* ============================================ RESPONSIVE ============================================ */
+
+@media (max-width: 576px) {
+    .contenedor-bienvenida {
+        padding: 30px 20px;
+        max-width: 90%;
+    }
+
+    #logo-bienvenida {
+        width: 80px;
+        height: 80px;
+    }
+
+    #input-nombre {
+        padding: 10px;
+        font-size: 14px;
+    }
+}

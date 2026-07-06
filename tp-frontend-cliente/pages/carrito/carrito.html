@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TechStore | Carrito</title>
+   
+    <link rel="stylesheet" href="./carrito.css">
+
+</head>
+
+<body class="oscuro">
+
+
+    <header>
+        <div class="contenedor-lado-header">
+            <a href="../../index.html" style="display:flex;align-items:center;gap:20px;text-decoration:none;">
+                <img id="icono-principal" src="../../logo-tech.png" alt="logo techstore">
+                <h1 id="titulo-principal">TechStore</h1>
+            </a>
+        </div>
+        <nav id="listado-opciones">
+            <a href="../../index.html">🏪 Productos</a>
+            <a href="#" id="btn-tema">🌓 Tema</a>
+            <span class="nombre-alumno">👤 <span id="nombre-usuario">Invitado</span></span>
+        </nav>
+    </header>
+
+
+    
+
+
+
+
+    <!-- MAIN DE LA PAGINA -->
+    <main>
+        <div id="contenedor-tabla">
+            <table id="tabla-carrito">
+                <tr class="fila-header-carrito">
+                    <td class="celda-header-tabla-carrito">Nombre del producto</td>
+                    <td class="celda-header-tabla-carrito">Cantidad</td>
+                    <td class="celda-header-tabla-carrito">Precio unitario</td>
+                </tr>
+            </table>
+        </div>
+        <button class="btn-limpiar-carrito" onclick="limpiarCarrito()">Limpiar carrito</button>
+        <button class="btn-confirmar" onclick="confirmarCompra()">Confirmar compra</button>
+        <h2 id="valor-final">El valor final a pagar es de: $0</h2>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>2026 TechStore - Todos los derechos reservados</p>
+    </footer>
+
+    <!-- IMPORTACION DEL JS -->
+    <script src="./carrito.js"></script>
+</body>
+
+</html>

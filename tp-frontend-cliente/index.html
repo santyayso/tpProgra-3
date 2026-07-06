@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechStore</title>
+   
+    <link rel="stylesheet" href="css.css">
+</head>
+<body class="oscuro">
+    <!-- CONTENIDO PRINCIPAL (visible) -->
+    <div id="contenido-principal">
+        <header>
+            <div class="contenedor-lado-header">
+                 <a href="index.html" style="display:flex;align-items:center;gap:20px;text-decoration:none;">
+
+                <img id="icono-principal" src="logo-tech.png" alt="logo techstore">
+                <h1 id="titulo-principal">TechStore</h1>
+                </a>
+            </div>
+            <nav id="listado-opciones">
+                <a href="./pages/carrito/carrito.html">🛒 Carrito (<span id="contador-carrito">0</span>)</a>
+                <a href="#" id="btn-tema">🌓 Tema</a>
+                <span class="nombre-alumno">👤 <span id="nombre-usuario">Invitado</span></span>
+            </nav>
+        </header>
+
+        <main>
+            <section class="seccion-productos" id="seccion-celulares">
+                <h2 class="h2-separador">📱 Celulares</h2>
+                <ul id="listado-celulares"></ul>
+            </section>
+
+            <section class="seccion-productos" id="seccion-computadoras">
+                <h2 class="h2-separador">💻 Computadoras</h2>
+                <ul id="listado-computadoras"></ul>
+            </section>
+        </main>
+
+        <footer>
+            <p>2026 TechStore - Todos los derechos reservados</p>
+        </footer>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>

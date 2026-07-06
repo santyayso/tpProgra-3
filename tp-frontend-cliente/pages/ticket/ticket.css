@@ -1,0 +1,176 @@
+body {
+    font-family: Arial;
+    background-color: #161616;
+    color: white;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+/* ============================================ HEADER ============================================ */
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 30px;
+    background-color: #0d0d0d;
+}
+
+#icono-principal {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+#titulo-principal {
+    font-size: 28px;
+    color: white;
+}
+
+.nombre-alumno {
+    padding: 8px 15px;
+    border-radius: 20px;
+    border: 1px solid #333;
+    color: white;
+}
+
+/* ============================================ HEADER ============================================ */
+
+/* ============================================ MAIN ============================================ */
+
+main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+/* ============================================ MAIN ============================================ */
+
+/* ============================================ TICKET ============================================ */
+
+#contenedor-ticket {
+    background-color: #0d0d0d;
+    border-radius: 16px;
+    padding: 30px;
+    border: 2px solid #333;
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+#ticket-contenido h3 {
+    text-align: center;
+    color: #4CAF50;
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+/* ============================================ TICKET ============================================ */
+
+/* ============================================ BOTONES ============================================ */
+
+.acciones-ticket {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.btn-exito {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.btn-exito:hover {
+    background-color: #45a049;
+}
+
+.btn-volver {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.btn-volver:hover {
+    background-color: #555;
+}
+
+/* ============================================ BOTONES ============================================ */
+
+/* ============================================ FOOTER ============================================ */
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #0d0d0d;
+    margin-top: 40px;
+    font-size: 14px;
+}
+
+/* ============================================ FOOTER ============================================ */
+
+/* ============================================ RESPONSIVE ============================================ */
+
+@media (max-width: 576px) {
+    header {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px;
+    }
+
+    #icono-principal {
+        width: 40px;
+        height: 40px;
+    }
+
+    #titulo-principal {
+        font-size: 20px;
+    }
+
+    .nombre-alumno {
+        font-size: 12px;
+        padding: 4px 10px;
+    }
+
+    main {
+        padding: 15px 10px;
+    }
+
+    #contenedor-ticket {
+        padding: 20px;
+    }
+
+    .acciones-ticket {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .btn-exito,
+    .btn-volver {
+        width: 100%;
+        text-align: center;
+        padding: 12px 20px;
+        font-size: 14px;
+        box-sizing: border-box;
+    }
+
+    footer {
+        font-size: 12px;
+        padding: 15px;
+    }
+}

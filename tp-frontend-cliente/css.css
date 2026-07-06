@@ -1,0 +1,310 @@
+:root {
+    --fondo: #161616;
+    --card: #0d0d0d;
+    --texto: #fff;
+    --gris: #333;
+    --verde: #4CAF50;
+    --rojo: #ff4444;
+}
+
+body.oscuro {
+    font-family: Arial;
+    background-color: var(--fondo);
+    color: var(--texto);
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: var(--texto);
+}
+
+/* ============================================ TEMA CLARO ============================================ */
+
+body.claro {
+    background-color: #f5f5f5;
+    color: #161616;
+}
+
+body.claro header,
+body.claro .li-celular,
+body.claro .li-computadora {
+    background-color: #fff;
+}
+
+body.claro .h2-separador {
+    background-color: #e8e8e8;
+    color: #161616;
+}
+
+body.claro footer {
+    background-color: #e8e8e8;
+    color: #161616;
+}
+
+body.claro .descripcion-producto {
+    color: #555;
+}
+
+body.claro .nombre-producto {
+    color: #161616;
+}
+
+body.claro .contenedor-bienvenida {  
+    background-color: #fff;
+}
+
+body.claro .contenedor-bienvenida p {
+    color: #555;
+}
+
+body.claro #input-nombre {
+    background-color: #fff;
+    color: #161616;
+}
+
+/* ============================================ TEMA CLARO ============================================ */
+
+
+
+/* ============================================ HEADER ============================================ */
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 30px;
+    background-color: var(--card);
+}
+
+.contenedor-lado-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+#icono-principal {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: inline-block;
+}
+
+#titulo-principal {
+    font-size: 28px;
+    margin: 0;
+}
+
+#listado-opciones {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+}
+
+#listado-opciones a {
+    padding: 8px 12px;
+    border-radius: 8px;
+}
+
+#listado-opciones a:hover {
+    background-color: var(--gris);
+}
+
+.nombre-alumno {
+    padding: 8px 15px;
+    border-radius: 20px;
+    border: 1px solid var(--gris);
+}
+
+/* ============================================ HEADER ============================================ */
+
+
+
+/* ============================================ MAIN ============================================ */
+
+main {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.h2-separador {
+    background-color: var(--card);
+    padding: 15px;
+    margin: 30px 0 20px 0;
+    text-align: center;
+    font-size: 28px;
+    border-radius: 12px;
+}
+
+/* ============================================ MAIN ============================================ */
+
+
+
+/* ============================================ PRODUCTOS ============================================ */
+
+#listado-celulares,
+#listado-computadoras {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+    padding: 10px;
+}
+
+.li-celular,
+.li-computadora {
+    background-color: var(--card);
+    border-radius: 16px;
+    padding: 20px;
+    width: 280px;
+}
+
+.li-celular:hover,
+.li-computadora:hover {
+    border-color: var(--gris);
+    background-color: #1a1a1a;
+}
+
+.img-producto {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.nombre-producto {
+    font-weight: 700;
+    margin: 15px 0 10px 0;
+    text-align: center;
+}
+
+.precio-producto {
+    font-weight: 700;
+    font-size: 22px;
+    text-align: center;
+    color: var(--verde);
+}
+
+.boton-agregar {
+    background-color: var(--verde);
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 16px;
+    width: 100%;
+    margin-top: 15px;
+}
+
+.boton-agregar:hover {
+    background-color: #45a049;
+}
+
+/* ============================================ PRODUCTOS ============================================ */
+
+
+
+/* ============================================ FOOTER ============================================ */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: var(--card);
+    margin-top: 40px;
+}
+
+/* ============================================ FOOTER ============================================ */
+
+
+
+/* ============================================ RESPONSIVE ============================================ */
+
+/* TELEFONOS VERTICALES (< 576px)*/
+@media (max-width: 576px) {
+    header {
+        flex-direction: column;
+        gap: 10px;
+        padding: 15px;
+    }
+
+    .contenedor-lado-header {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    #icono-principal {
+        width: 40px;
+        height: 40px;
+    }
+
+    #titulo-principal {
+        font-size: 20px;
+        white-space: normal;
+        text-align: center;
+    }
+
+    #listado-opciones {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    #listado-opciones a {
+        padding: 6px 10px;
+        font-size: 14px;
+    }
+
+    .nombre-alumno {
+        padding: 4px 10px;
+        font-size: 12px;
+    }
+
+    .h2-separador {
+        font-size: 20px;
+        padding: 10px;
+        margin: 20px 0 15px 0;
+    }
+
+    main {
+        padding: 10px;
+    }
+
+    .li-celular,
+    .li-computadora {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .img-producto {
+        height: 150px;
+    }
+
+    .nombre-producto {
+        font-size: 16px;
+    }
+
+    .precio-producto {
+        font-size: 18px;
+    }
+
+    .descripcion-producto {
+        font-size: 13px;
+        min-height: 60px;
+    }
+
+    .boton-agregar {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    footer {
+        font-size: 12px;
+        padding: 15px;
+    }
+}

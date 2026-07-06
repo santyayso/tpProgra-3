@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechStore - Ticket de Compra</title>
+    
+    <link rel="stylesheet" href="ticket.css">
+
+    <!--lIBRERIA DE JS QUE PERMITE CREAR ARCHIVOSS PDF, ACA LA ESTAMOS AGREGANDO -->
+    <script src="https://unpkg.com/jspdf@latest/dist/jspdf.umd.min.js"></script>
+
+</head>
+<body>
+    <header>
+        <div class="contenedor-lado-header">
+            <a href="ticket.html" style="display:flex;align-items:center;gap:20px;text-decoration:none;">
+                <img id="icono-principal" src="../../logo-tech.png" alt="logo techstore">
+                <h1 id="titulo-principal">TechStore</h1>
+            </a>
+        </div>
+        <nav id="listado-opciones">
+            <span class="nombre-alumno">👤 <span id="nombre-usuario">Invitado</span></span>
+        </nav>
+    </header>
+
+    <main>
+        <h2 class="h2-separador">Ticket de Compra</h2>
+        
+        <div id="contenedor-ticket">
+            <div id="ticket-contenido">
+            </div>
+        </div>
+
+        <div class="acciones-ticket">
+            <button id="btn-descargar-pdf" class="btn-exito" onclick="imprimirTicket()">Descargar PDF</button>
+            <a href="../login/login.html" class="btn-volver">Volver al inicio</a>
+        </div>
+    </main>
+
+    <footer>
+        <p>2026 TechStore - Todos los derechos reservados</p>
+    </footer>
+
+    <script src="ticket.js"></script>
+</body>
+</html>
