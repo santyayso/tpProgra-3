@@ -48,4 +48,22 @@ const validarProducto = (request, response, next) => {
     next();
 };
 
-export {validarId, validarProducto}
+
+
+
+// Middleware simple de proteccion de rutas -> Este middleware lo llamamos cada vez que servimos una ruta del dashboard
+const requireLogin = (req, res, next) => {
+
+    // Si cuando llamemos a una vista, no existe una sesion creada, redirigiremos a /login
+    if (!req.session.user) {
+        // En lugar de renderizar con res.render("") -> aca redirigimos a una URL
+        return res.redirect("/login")
+    }
+
+    next();
+}
+
+
+
+
+export {validarId, validarProducto,  requireLogin}

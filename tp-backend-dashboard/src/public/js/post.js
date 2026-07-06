@@ -1,6 +1,9 @@
 const contenedorProductos = document.getElementById("contenedor-productos");
 const postProductForm = document.getElementById("postProduct-form");
-const urlBase = "http://localhost:3000/api/productos";
+const urlBase = "http://localhost:3000/api";
+
+// const urlBase = "http://localhost:3000/api/productos";
+const postUserForm = document.getElementById("postUser-form"); // Formulario de usuarios admin
 
 function mostrarMensaje(type, message) {
     contenedorProductos.innerHTML =
@@ -46,10 +49,65 @@ function validarFormulario(data) {
 }
 
 
+
+// Enviamos al endpoint el nuevo usuario admin
+postUserForm.addEventListener("submit", async event => {
+    event.preventDefault(); // Evitamos el envio por defecto del formulario
+
+    // Convertimos la data del form en un objeto nativo del DOM, FormData
+    const formData = new FormData(event.target);
+
+    // Convertimos el objeto FormData en un objeto literal JS para hacerle luego JSON.stringify() para enviarselo al servidor en el body de la peticion http
+    const data = Object.fromEntries(formData.entries());
+    console.table(data);
+    
+    try {
+        const response = await fetch(`${urlBase}/users`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        });
+        
+        console.log(response); // Response {type: 'cors', url: 'http://localhost:3000/api/products', redirected: false, status: 200, ok: true, …}
+
+        // Aca transformare la respuesta JSON que devuelve el endpoint: message: "Producto creado con exito"
+        const result = await response.json(); // Aca obtenemos la respuesta parseada que me devuelve el servidor
+
+        if (!response.ok) {
+            
+            if (result.listaErrores) {
+                mostrarListaErrores(result.listaErrores);
+                return;
+            }
+
+            mostrarMensaje("error", result.message);
+            return;
+        }
+
+        // En caso de exito, mostramos los siguientes mensajes
+        mostrarMensaje("exito", result.message);
+        console.log(result.message);
+
+        
+
+    } catch (error) {
+        // El console.error es igual al console.log pero nos aparece en rojo en formato visual tipo error
+        console.error("Error al enviar los datos ", error);
+        mostrarMensaje("error", "Error al procesar la solicitud")
+    }
+})
+
+
+
 postProductForm.addEventListener("submit", async event => {
     event.preventDefault();
 
+    // event.target es el form
     const formData = new FormData(event.target);
+
+    // Lo convierte a objeto normal
     const data = Object.fromEntries(formData.entries());
 
     data.precio = Number(data.precio);
@@ -62,7 +120,7 @@ postProductForm.addEventListener("submit", async event => {
     }
 
     try {
-        const response = await fetch(urlBase, {
+        const response = await fetch(`${urlBase}/products`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

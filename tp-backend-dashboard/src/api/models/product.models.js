@@ -28,11 +28,7 @@ const updateProducto = (nombre, imagen, categoria, precio, activo, id) => {
 
 }
 
-const insertVenta = (nombreUsuario, fecha, precio) => {
-    const consultaSQL = "INSERT INTO ventas (nombre_usuario, fecha, precio_total) VALUES (?, ?, ?)";
-    return connection.query(consultaSQL, [nombreUsuario, fecha, precio]);
 
-}
 
 export default {
     selectProductos,
