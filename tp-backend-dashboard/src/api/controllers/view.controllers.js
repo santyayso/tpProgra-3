@@ -1,13 +1,16 @@
 import { request, response } from "express";
 import ProductModels from "../models/product.models.js"
 
-export const vistaIndex = async (request, response) => {
+const vistaIndex = async (request, response) => {
     try {
         const [filas] = await ProductModels.selectProductos();
+        const productosActivos = filas.filter((producto) => Number(producto.activo) === 1)
+        const productosInactivos = filas.filter((producto) => Number(producto.activo) === 0)
 
         response.render("index", {
             title: "Principal",
-            arrayProductos: filas,
+            productosActivos,
+            productosInactivos
         });
     }
     catch (error) {
@@ -16,30 +19,66 @@ export const vistaIndex = async (request, response) => {
     }
 }
 
-export const vistaGet = async (request, response) => {
-    response.render("get", {
-        title: "Consultar",
-    })
+const vistaGet = async (request, response) => {
+    try {
+        response.render("get", {
+            title: "Consultar",
+        });
+    }
+    catch (error) {
+        console.error(error);
+        response.status(500).send("No se pudo cargar la vista");
+    }
 
 }
 
-export const vistaPost = async (request, response) => {
-    response.render("post", {
-        title: "Crear"
-    })
+
+const vistaPost = async (request, response) => {
+    try {
+        response.render("post", {
+            title: "Crear"
+        })
+
+    }
+    catch (error) {
+        console.error(error);
+        response.status(500).send("No se pudo cargar la vista");
+    }
+
 }
 
-export const vistaBorrar = async (request, response) => {
+const vistaBorrar = async (request, response) => {
+    try {
         response.render("delete", {
-        title: "Eliminar",
-    })
+            title: "Eliminar",
+        })
+    }
+    catch (error) {
+        console.error(error);
+        response.status(500).send("No se pudo cargar la vista");
+    }
 
 }
 
 
-export const vistaModificar = async (request, response) => {
-    response.render("put", {
-        title: "Modificar",
-    
-    })
+const vistaModificar = async (request, response) => {
+    try {
+        response.render("put", {
+            title: "Modificar",
+
+        })
+    }
+    catch (error) {
+        console.error(error);
+        response.status(500).send("No se pudo cargar la vista");
+    }
+
+}
+
+export {
+    vistaBorrar,
+    vistaGet,
+    vistaIndex,
+    vistaModificar,
+    vistaPost
 }

@@ -1,32 +1,36 @@
 import connection from "../database/db.js";
 
 const selectProductos = () => {
-    const consultaSQL = "SELECT id, nombre, imagen, categoria, precio FROM productos WHERE activo = 1";
+    const consultaSQL = "SELECT id, nombre, imagen, categoria, precio, activo FROM productos";
     return connection.query(consultaSQL);
 }
 
-const selecProductById = (id) => {
-    const consultaSQL = "SELECT id, nombre, imagen, categoria, precio FROM productos WHERE productos.id = ?";
 
+const selecProductById = (id) => {
+    const consultaSQL = "SELECT id, nombre, imagen, categoria, precio, activo FROM productos WHERE productos.id = ?";
     return connection.query(consultaSQL, [id]);
 }
 
 const insertProductos = (cleanNombre, imagen, categoria, precio) => {
-        const consultaSQL = "INSERT INTO productos (nombre, imagen, categoria, precio) VALUES (?, ?, ?, ?)";
-
-        return connection.query(consultaSQL, [cleanNombre, imagen, categoria, precio]);
+    const consultaSQL = "INSERT INTO productos (nombre, imagen, categoria, precio) VALUES (?, ?, ?, ?)";
+    return connection.query(consultaSQL, [cleanNombre, imagen, categoria, precio]);
 }
 
 
 const deleteProducto = (id) => {
-      const consultaSQL = "DELETE FROM productos WHERE id = ?";
-
-       return connection.query(consultaSQL, [id]);
+    const consultaSQL = "DELETE FROM productos WHERE id = ?";
+    return connection.query(consultaSQL, [id]);
 }
 
-const updateProducto = (nombre, imagen, categoria, precio, id) => {
-        const consultaSQL = `UPDATE productos SET nombre = ?, imagen = ?, categoria = ?, precio = ? WHERE id = ?`;
-        return connection.query(consultaSQL, [nombre, imagen, categoria, precio, id]);
+const updateProducto = (nombre, imagen, categoria, precio, activo, id) => {
+    const consultaSQL = `UPDATE productos SET nombre = ?, imagen = ?, categoria = ?, precio = ?, activo = ? WHERE id = ?`;
+    return connection.query(consultaSQL, [nombre, imagen, categoria, precio, activo, id]);
+
+}
+
+const insertVenta = (nombreUsuario, fecha, precio) => {
+    const consultaSQL = "INSERT INTO ventas (nombre_usuario, fecha, precio_total) VALUES (?, ?, ?)";
+    return connection.query(consultaSQL, [nombreUsuario, fecha, precio]);
 
 }
 

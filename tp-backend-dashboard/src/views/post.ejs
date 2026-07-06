@@ -1,40 +1,41 @@
 <%- include("partials/head.ejs")%>
     <%- include("partials/nav.ejs")%>
 
-<main>
+        <main>
 
-        <section class="form-productos">
-            <h2>Crear producto</h2>
+            <section class="form-productos">
+                <h2>Crear producto</h2>
 
-            <form id="postProduct-form" class="form-alta">
-                <label for="nameProd">Nombre</label>
-                <input type="text" name="nombre" id="nameProd" required>
+                <form id="postProduct-form" class="form-alta">
+                    <label for="nameProd">Nombre</label>
+                    <input type="text" name="nombre" id="nameProd" required>
 
-                <label for="imageProd">Imagen</label>
-                <input type="text" name="imagen" id="imageProd" required>
+                    <label for="imageProd">Imagen</label>
+                    <input type="text" name="imagen" id="imageProd" required>
 
-                <label for="categoryProd">Categoria</label>
-                <select name="categoria" id="categoryProd" required>
-                    <option value="Celulares">Celulares</option>
-                    <option value="Computadoras">Computadoras</option>
-                </select>
+                    <label for="categoryProd">Categoria</label>
+                    <select name="categoria" id="categoryProd" required>
+                        <option value="Celulares">Celulares</option>
+                        <option value="Computadoras">Computadoras</option>
+                    </select>
 
-                <label for="priceProd">Precio</label>
-                <input type="number" name="precio" id="priceProd" required>
+                    <label for="priceProd">Precio</label>
+                    <input type="number" name="precio" id="priceProd" required>
 
-                <div>
-                    <input type="submit" value="Crear producto">
+                    <div>
+                        <input type="submit"  class="input-submit" value="Crear producto">
+                    </div>
+                </form>
+
+            </section>
+
+            <section class="secccion-productos">
+                <div id="contenedor-productos">
+
                 </div>
-            </form>
+            </section>
 
-        </section>
-
-        <section class="secccion-productos">
-            <div id="contenedor-productos">
-
-            </div>
-        </section>
-    </main>
+        </main>
 
 
         <script src="/js/post.js"> </script>

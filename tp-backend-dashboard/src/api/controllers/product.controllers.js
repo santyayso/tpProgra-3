@@ -1,7 +1,7 @@
 import { request, response } from "express";
 import ProductModels from "../models/product.models.js";
 
-export const controladorObtenerProductos = async (request, response) => {
+const controladorObtenerProductos = async (request, response) => {
     try {
         const [filas, campos] = await ProductModels.selectProductos();
 
@@ -13,11 +13,12 @@ export const controladorObtenerProductos = async (request, response) => {
 
         response.status(200).json({
             productos: filas,
-            total: filas.length  
+            totalProductos: filas.length
         });
     }
 
     catch (error) {
+        // VALIDACION ERROR INTERNO (CONSULTA MAL)
         console.log(error)
         response.status(500).json({
             message: "Error interno del servidor al obtener productos"
@@ -26,11 +27,11 @@ export const controladorObtenerProductos = async (request, response) => {
 
 }
 
-export const controladorObtenerProductoID = async (request, response) => {
+const controladorObtenerProductoID = async (request, response) => {
     try {
-
         const [filas] = await ProductModels.selecProductById(request.id)
 
+        // VALIDACION POR SI EL ID INGRESADO NO EXISTE
         if (filas.length === 0) {
             return response.status(404).json({
                 message: `No se encontraron productos con ID: ${request.id}`
@@ -42,8 +43,8 @@ export const controladorObtenerProductoID = async (request, response) => {
         })
 
     }
+    // VALIDACION ERROR INTERNO (CONSULTA MAL)
     catch (error) {
-
         console.log(error)
         response.status(500).json({
             message: "Error interno del servidor al obtener un producto por ID"
@@ -53,50 +54,47 @@ export const controladorObtenerProductoID = async (request, response) => {
 }
 
 
-export const controladorCrearProducto = async (request, response) => {
+const controladorCrearProducto = async (request, response) => {
     try {
-
         const { nombre, imagen, categoria, precio } = request.body;
-
-        const cleanNombre = nombre.trim(); 
-
+        const cleanNombre = nombre.trim();
         const [filas] = await ProductModels.insertProductos(cleanNombre, imagen, categoria, precio);
 
         response.status(201).json({
             message: `Producto creado con exito con id ${filas.insertId}`,
-            productId: filas.insertId 
         });
 
     }
+
+    // VALIDACION ERROR INTERNO (CONSULTA MAL)
     catch (error) {
         console.log(error)
         response.status(500).json({
             message: "Error interno del servidor al crear productos"
         });
-
     }
 }
 
 
 
-export const controladorBorrarProducto = async (request, response) => {
+const controladorBorrarProducto = async (request, response) => {
     try {
-
-    await ProductModels.deleteProducto(request.id);
+        await ProductModels.deleteProducto(request.id);
 
         response.status(200).json({
             message: `Producto con id ${request.id} eliminado correctamente`
 
         })
     }
+
+    // VALIDACION ERROR INTERNO (CONSULTA MAL)
     catch (error) {
         console.log(error);
         response.status(500).json({
             message: "Error interno del servidor al eliminar productos"
         });
     }
-
-
+    
 }
 
 
@@ -104,32 +102,41 @@ export const controladorBorrarProducto = async (request, response) => {
 
 
 
-export const controladorModificarProducto = async (request, response) => {
+const controladorModificarProducto = async (request, response) => {
     try {
-        const { id, nombre, imagen, categoria, precio } = request.body;
+        const { id, nombre, imagen, categoria, precio, activo } = request.body;
 
-        const [result] = await ProductModels.updateProducto(nombre, imagen, categoria, precio, id);
+        const [result] = await ProductModels.updateProducto(nombre, imagen, categoria, precio, activo, id);
 
-
-        if (result.affectedRows === 0) {
+        /////
+        if (result.changedRows === 0) {
             return response.status(404).json({
-                message: `No se actualizo el producto`
+                message: `No se modificó ningún dato del producto`
             })
         }
 
 
-        return response.status(200).json({
-            message: "Producto actualizado correctamente"
-        });
+            return response.status(200).json({
+                message: "Producto actualizado correctamente"
+            });
 
     }
 
+    // VALIDACION ERROR INTERNO (CONSULTA MAL)
     catch (error) {
         console.log(error)
-       
         response.status(500).json({
             message: "Error interno del servidor al actualizar productos"
         });
     }
 
+}
+
+
+export {
+    controladorBorrarProducto,
+    controladorCrearProducto,
+    controladorModificarProducto,
+    controladorObtenerProductoID,
+    controladorObtenerProductos
 }

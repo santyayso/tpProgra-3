@@ -1,105 +1,107 @@
- function mostrarMensaje(type, message) {
-            contenedorProductos.innerHTML = `
+const urlBase = "http://localhost:3000/api/productos";
+const contenedorProductos = document.getElementById("contenedor-productos");
+const getProductForm = document.getElementById("getProduct-form");
+const contenedorForm = document.getElementById("contenedor-form");
+
+function mostrarMensaje(type, message) {
+    contenedorForm.innerHTML = `
         <p class="mensaje-${type}">${message}</p>
     `;
+}
+
+function mostrarListaErrores(array) {
+    let htmlErrores = "";
+    array.forEach(error => {
+        htmlErrores += `<p class="mensaje-error">${error}</p>`
+    });
+    contenedorForm.innerHTML = htmlErrores;
+}
+
+
+
+getProductForm.addEventListener("submit", async event => {
+    event.preventDefault(); //Evitamos el envio por defecto HTML del formulario
+
+    // Extraemos el id del producto
+    const idProd = event.target.idProd.value.trim();
+
+    /// VALIDACION POR SI EL CAMPO ESTA VACIO (SACANDO EL REQUIRED)
+    if (!idProd) {
+        mostrarMensaje("error", "Por favor, complete el campo e ingrese un ID valido")
+        return;
+    }
+
+    try {
+        const response = await fetch(`${urlBase}/${idProd}`);
+        const datos = await response.json();
+
+        // VALIDACION SI SE PUDO HACER EL FETCH, PERO DEVOLVIÓ UN ESTADO/CODIGO DE RESPUESTA QUE NO ESTA ENTRE 200 Y 299 (middelware ID POSITIVO, producto no existente u error INTERNO)
+        if (!response.ok) {
+            contenedorForm.innerHTML = "";
+            mostrarMensaje("error", datos.message);
+            return;
         }
 
-        function mostrarListaErrores(array) {
-            let htmlErrores = "";
-            array.forEach(error => {
-                htmlErrores += `<p class="mensaje-error">${error}</p>`
-            });
-            contenedorForm.innerHTML = htmlErrores;
-        }
 
 
-        const urlBase = "http://localhost:3000/api/productos";
-        const contenedorProductos = document.getElementById("contenedor-productos");
-        const getProductForm = document.getElementById("getProduct-form");
-        const contenedorForm = document.getElementById("contenedor-form");
+        const producto = datos.producto[0];
+        renderizarProducto(producto);
 
-        getProductForm.addEventListener("submit", async event => {
-            event.preventDefault(); //Evitamos el envio por defecto HTML del formulario
+    } catch (error) {
+        console.error("Error al obtener el producto");
+        mostrarMensaje("error", "Error de conexion con el servidor");
+    }
+});
 
-            // Extraemos el id del producto
-            const idProd = event.target.idProd.value.trim();
-
-            if (!idProd) {
-                mostrarMensaje("error", "Ingresa un ID valido")
-                return;
-
-            }
-
-
-            try {
-                
-                const response = await fetch(`${urlBase}/${idProd}`);
-                console.log(response);
-
-              
-                const datos = await response.json();
-
-
-
-                if (!response.ok) {
-                    contenedorForm.innerHTML = "";
-                    mostrarMensaje("error", datos.message);
-                    return;
-                }
-
-                console.log(datos);
-
-                const producto = datos.producto[0];
-
-                console.log(producto);
-  
-                renderizarProducto(producto);
-
-            } catch (error) {
-                console.error("Error al obtener el producto");
-                mostrarMensaje("error", "Error de conexion con el servidor");
-            }
-        });
-
-        function renderizarProducto(producto) {
-            let htmlProducto = `
+function renderizarProducto(producto) {
+    let htmlProducto = `
             <ul>
                 <li class="lista-producto">
                     <img src="${producto.imagen}" alt="${producto.nombre}">
                     <p>Id: ${producto.id} / Nombre: ${producto.nombre} / <strong>Precio: $${producto.precio}</strong></p>
-                    <input type="button" id="deleteProduct-button" value="Actualizar Producto">
+                    <input type="button" id="updateProduct-button" value="Modificar Producto">
                 </li>
             </ul>
             `;
 
-            contenedorProductos.innerHTML = htmlProducto;
-
-            // Otra opcion seria agregando el atributo onclick="nombrefuncion"
-
-            const deleteProductButton = document.getElementById("deleteProduct-button");
-
-            deleteProductButton.addEventListener("click", event => {
-                event.stopPropagation();
+    contenedorProductos.innerHTML = htmlProducto;
 
 
 
-                const confirmacion = confirm("Querés actualizar este producto?");
+    const updateProductButton = document.getElementById("updateProduct-button");
 
-                if (!confirmacion) {
-                    alert("Eliminacion cancelada");
-                } else {
-                    crearFormularioPut(event, producto);
-                }
-            });
-        }
+    updateProductButton.addEventListener("click", event => {
+        event.stopPropagation();
+        crearFormularioPut(event, producto);
+
+    });
+}
 
 
-        async function crearFormularioPut(event, producto) {
-            // try {
-            event.stopPropagation();
-            console.table(producto);
+async function crearFormularioPut(event, producto) {
+    event.stopPropagation();
+    // console.table(producto);
 
-            let updateFormHTML = `
+ 
+    let selectedInactivo = "";
+    let selectedActivo = "";
+
+    if (Number(producto.activo) === 1) {
+        selectedActivo = "selected";
+    } else {
+        selectedInactivo = "selected";
+    }
+
+    let selectedCelulares = "";
+    let selectedComputadoras = "";
+
+    if (producto.categoria === "Celulares") {
+        selectedCelulares = "selected";
+    } else if (producto.categoria === "Computadoras") {
+        selectedComputadoras = "selected";
+    }
+
+    let updateFormHTML = `
                 <hr>
                 <form id="updateProduct-form" class="form-alta">
                     <input type="hidden" name="id" value="${producto.id}">
@@ -112,8 +114,8 @@
 
                     <label for="categoryProd">Categoría</label>
                     <select name="categoria" id="categoryProd" required>
-                        <option value="Celulares">Celulares</option>
-                        <option value="Computadoras">Computadoras</option>
+                        <option value="Celulares" ${selectedCelulares}>Celulares</option>
+                        <option value="Computadoras" ${selectedComputadoras}>Computadoras</option>
                     </select>
 
                     <label for="priceProd">Precio</label>
@@ -121,105 +123,81 @@
 
                     
                     <label for="activeProd">Activo</label>
-                                  <select name="activo" id="activeProd" required>
-                        <option value="0">inactivo</option>
-                        <option value="1">activo</option>
+                        <select name="activo" id="activeProd" required>
+                        <option value="0" ${selectedInactivo}>Inactivo</option>
+                        <option value="1" ${selectedActivo}>Activo</option>
                     </select>
 
-
                     <div>
-                        <input type="submit" value="Actualizar  producto">
+                        <input type="submit" value="Guardar cambios">
                     </div>
                 </form>
 
             `;
-            contenedorForm.innerHTML = updateFormHTML;
+    contenedorForm.innerHTML = updateFormHTML;
 
-            const updateProductForm = document.getElementById("updateProduct-form");
+    const updateProductForm = document.getElementById("updateProduct-form");
 
-            updateProductForm.addEventListener("submit", event => {
-                actualizarProducto(event);
-            });
+    updateProductForm.addEventListener("submit", event => {
+        actualizarProducto(event);
+    });
 
-            // }
+}
 
-            // catch (error) {
-            //     console.error("Error en la solicitud DELETE: ", error);
-            //     alert("Ocurrio un error al eliminar un producto");
-            // }
-        }
+async function actualizarProducto(event) {
 
-        // Funcion para realizar una operacion delete
-        async function actualizarProducto(event) {
+    event.preventDefault(); // Evitamos el envío por defecto del formulario
 
-            event.preventDefault(); // Evitamos el envío por defecto del formulario
+    // Recogemos los datos del formulario en un objeto FormData (no podemos hacer stringify())
+    const formData = new FormData(event.target);
 
-            // Recogemos los datos del formulario en un objeto FormData (no podemos hacer stringify())
-            const formData = new FormData(event.target);
+    // Parseamos este objeto FormData a un objeto JS para poder enviarlo como JSON.stringify() en el cuerpo de la petición
+    const data = Object.fromEntries(formData.entries());
 
-            // Parseamos este objeto FormData a un objeto JS para poder enviarlo como JSON.stringify() en el cuerpo de la petición
-            const data = Object.fromEntries(formData.entries());
+    data.precio = Number(data.precio);
+    data.activo = Number(data.activo);
 
-            data.precio = Number(data.precio);
-
-
-            try {
-                const response = await fetch(urlBase, {
-                    method: "PUT",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify(data)
-                });
+    try {
+        const response = await fetch(urlBase, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        });
 
 
-                console.log(response);
+        console.log(response);
 
-                const result = await response.json();
-                console.log(result);
-
-
-                // Optimizacion : Manejamos una respuesta no ok del
-                // if (!response.ok) {
-
-                //     // console.log(`Lista de errores: \n ${result.listaErrores.length}`);
-                //     contenedorForm.innerHTML = "";
-                //     // TO DO: Crear mostrarListaErrores
-                //     if (result.listaErrores) {
-                //         mostrarListaErrores(result.listaErrores);
-                //     }
-                //     mostrarMensaje("error", result.message);
-                //     console.log(result);
-                //     result.listaErrores.forEach(error => {
-                //         console.log(error);
-                //     })
-                //     console.log(result.listaErrores)
-                //     return;
-
-                // }
+        const result = await response.json();
+        console.log(result);
 
 
+        // CAPUTRAMOS ERRORES DEL CONTROLADOR
+        if (!response.ok) {
+            if (result.listaErrores) {
+                mostrarListaErrores(result.listaErrores)
 
-                 if (!response.ok) {
-
-                                mostrarMensaje("error", result.message);
-                                return;
-                            }
-
-
-
-                getProductForm.innerHTML = "";
-                contenedorForm.innerHTML = "";
-
-                mostrarMensaje("exito", result.message);
-                console.log(result.message);
-
-
-            } catch (error) {
-                console.error(error);
             }
-
-
-
-
+            mostrarMensaje("error", result.message);
+            return;
         }
+
+
+
+        getProductForm.innerHTML = "";
+        contenedorForm.innerHTML = "";
+
+        mostrarMensaje("exito", result.message);
+
+
+    } catch (error) {
+        // VALIDACION POR SI NO SE PUDO HACER EL FETCH
+        console.error("Error al actualizar producto: ", error);
+        mostrarMensaje("error", "Error de conexion con el servidor");
+    }
+
+
+
+
+}
