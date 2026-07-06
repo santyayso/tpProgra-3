@@ -19,12 +19,14 @@ const { port, session_key } = environments;
 
 // Middleware CORS basico para permitir todas las solicitudes
 app.use(cors());
+
 // Middleware para parsear el JSON de las peticiones POST y PUT
 app.use(express.json());
+
 // Middleware para parsear info enviada con <forms>
 app.use(express.urlencoded({ extended: true }));
 
-console.log(environments);
+
 // Middleware de sesion
 app.use(session({
     secret: session_key, // Firmamos las cookies para evitar manipulacion (protegemos la sesion con una contraseña)
@@ -33,13 +35,14 @@ app.use(session({
 }));
 
 
-// No entiendo
+
 app.use(express.static(join(__dirname, "src/public")));
 
 
 
 // Vistas EJS
-app.set("view engine", "ejs"); // configuramos ejs como motor de vistas
+// configuramos ejs como motor de vistas
+app.set("view engine", "ejs"); 
 app.set("views", join(__dirname, "src/views"));
 
 app.use("/api/productos", productRoutes);
@@ -51,11 +54,6 @@ app.use("/api/users", userRoutes) // Rutas de usuario
 app.listen(PORT, () => {                   
     console.log(`Servidor corriendo en el puerto ${PORT}`);
 });
-
-
-
-
-
 
 
 

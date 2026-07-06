@@ -1,5 +1,7 @@
+// IMPORTAMOS DOTENV PARA PODER LEER LOS DATOS DEL .ENV
 import dotenv from "dotenv";
 
+// Esta línea es la que lee ese archivo .env y mete cada línea dentro de process.env:
 dotenv.config(); 
 
 export default {

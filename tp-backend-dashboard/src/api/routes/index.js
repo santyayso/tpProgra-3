@@ -1,4 +1,4 @@
-// / Archivo barril:centraliza todas las rutas y las exporta con un nombre
+// / Archivo barril:centraliza todas las rutas y las exporta 
 
 import productRoutes from "./product.routes.js"
 import viewRoutes from "./view.routes.js"
