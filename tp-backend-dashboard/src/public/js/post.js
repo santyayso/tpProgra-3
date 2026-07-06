@@ -120,7 +120,7 @@ postProductForm.addEventListener("submit", async event => {
     }
 
     try {
-        const response = await fetch(`${urlBase}/products`, {
+        const response = await fetch(`${urlBase}/productos`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

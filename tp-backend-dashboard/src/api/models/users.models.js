@@ -14,6 +14,7 @@ const insertUsuarioAdmin = (nombre, email, contraseña) => {
 
     const sql = "INSERT into usuarios (nombre, email, contraseña) VALUES (?, ?, ?)";
 
+    //  PROMESA
     return connection.query(sql, [nombre, email, contraseña]);
 }
 

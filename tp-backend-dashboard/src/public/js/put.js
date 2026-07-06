@@ -1,3 +1,4 @@
+
 const urlBase = "http://localhost:3000/api/productos";
 const contenedorProductos = document.getElementById("contenedor-productos");
 const getProductForm = document.getElementById("getProduct-form");
@@ -102,7 +103,6 @@ async function crearFormularioPut(event, producto) {
     }
 
     let updateFormHTML = `
-                <hr>
                 <form id="updateProduct-form" class="form-alta">
                     <input type="hidden" name="id" value="${producto.id}">
 
